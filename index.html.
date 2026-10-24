@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0d17">
+<meta name="description" content="UNORA — Tu mundo. Tu gente.">
+<title>UNORA — Tu mundo. Tu gente.</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+:root{color-scheme:dark;--bg:#0b0d17;--panel:#111421;--panel2:#171a2a;--line:#282b40;--muted:#9397ae;--purple:#8b5cf6;--blue:#5865f2;--pink:#f472b6}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#f5f4ff;font:14px 'DM Sans',sans-serif}
+button,input,textarea{font:inherit}button{color:inherit;cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #a99aff;outline-offset:3px}
+button:disabled{opacity:.5;cursor:not-allowed}
+.app{display:grid;grid-template-columns:220px minmax(0,1fr) 270px;max-width:1700px;margin:auto;min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;overflow:auto;padding:25px 15px;background:#0e101b;border-right:1px solid var(--line);display:flex;flex-direction:column;z-index:5}
+.brand{display:flex;align-items:center;gap:10px;font:700 25px 'Space Grotesk';letter-spacing:-1px;margin-bottom:28px}
+.logo{width:37px;height:37px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(135deg,#5865f2,#a855f7,#f472b6);font-size:24px}
+.brand b{color:#b8a3ff}
+.primary{border:0;border-radius:10px;padding:12px 15px;background:linear-gradient(110deg,#5865f2,#9456ec);font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.primary:hover{filter:brightness(1.15)}
+.create{width:100%;margin-bottom:25px}
+.label{font-size:10px;letter-spacing:1.5px;color:#858aa3;font-weight:700;margin:0 10px 12px}
+.nav{display:grid;gap:4px}
+.nav button{display:flex;align-items:center;gap:12px;padding:11px 10px;border-radius:9px;border:1px solid transparent;background:none;text-align:left;color:#a8abc0;font-size:12px}
+.nav button:hover{background:#191b2a;color:white}
+.nav button.active{background:#8b5cf618;border-color:#8b5cf633;color:#c9bbff}
+.nav .ico{width:20px;text-align:center;font-size:17px}
+.sidebar-foot{margin-top:auto;border-top:1px solid var(--line);padding-top:16px;color:#888da3;font-size:10px}
+.main{min-width:0}
+.topbar{height:70px;position:sticky;top:0;z-index:4;display:flex;align-items:center;gap:12px;padding:0 25px;border-bottom:1px solid var(--line);background:#0b0d17ed;backdrop-filter:blur(16px)}
+.search{flex:1;max-width:500px;display:flex;gap:10px;align-items:center;background:#151725;border:1px solid var(--line);padding:10px 12px;border-radius:10px;color:#979bb2}
+.search input{width:100%;border:0;outline:none;background:none;color:white;font-size:12px}
+.top-actions{margin-left:auto;display:flex;align-items:center;gap:10px}
+.icon-btn,.language{background:none;border:0;padding:8px;border-radius:8px;color:#bfc0d3}
+.icon-btn:hover,.language:hover{background:#202237}
+.avatar{width:34px;height:34px;border:1px solid #9b82ff;border-radius:11px;background:linear-gradient(135deg,#5865f2,#a855f7);font-weight:700}
+.mobile-menu{display:none}
+.content{max-width:850px;margin:auto;padding:25px 28px 0}
+.hero{position:relative;overflow:hidden;min-height:250px;padding:30px;border:1px solid #4c46804d;border-radius:18px;background:radial-gradient(ellipse at 85% 45%,#7652d43d,transparent 45%),linear-gradient(120deg,#181a2e,#171427)}
+.hero-content{position:relative;z-index:1;max-width:75%}
+.eyebrow{font-size:10px;letter-spacing:1.5px;color:#b6a2ff;font-weight:700}
+h1,h2,h3,p{overflow-wrap:anywhere}
+.hero h1,.page-title{font:600 clamp(27px,3vw,36px)/1.2 'Space Grotesk';letter-spacing:-1px;margin:16px 0 10px}
+.gradient{background:linear-gradient(90deg,#a7a8ff,#cf8aff,#ff91c7);background-clip:text;color:transparent}
+.hero p,.muted{font-size:12px;line-height:1.8;color:#a3a6bd}
+.hero-actions{display:flex;gap:10px;margin-top:20px}
+.secondary{background:#ffffff08;border:1px solid #ffffff25;border-radius:10px;padding:11px 14px;font-size:12px}
+.planet{position:absolute;right:8%;top:25%;width:115px;height:115px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 32% 28%,#d0c4ff,#9367fa 42%,#322171 78%);box-shadow:0 0 70px #805fff40,inset -12px -12px 25px #171039;font:700 55px 'Space Grotesk'}
+.section{margin-top:30px}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.section-head h2{font:600 18px 'Space Grotesk';margin:0 0 5px}
+.section-head p{font-size:11px;color:var(--muted);margin:0}
+.text-button{background:none;border:0;color:#b5a2ff;font-size:11px}
+.stories{display:flex;gap:19px;overflow-x:auto;padding:18px 0 5px}
+.story{min-width:55px;display:grid;justify-items:center;gap:7px;background:none;border:0;color:#c5c5d7;font-size:10px}
+.story-ring{width:56px;height:56px;border-radius:50%;padding:3px;display:grid;place-items:center;background:linear-gradient(135deg,#5865f2,#b45cf5,#f472b6)}
+.story-face{width:100%;height:100%;border:3px solid #111421;border-radius:50%;display:grid;place-items:center;background:#24263a;font-size:22px}
+.story.add .story-ring{background:#26283d;border:1px dashed #9081ed;color:#c5b4ff}
+.tabs{display:flex;gap:4px;background:#151725;padding:4px;border-radius:9px}
+.tabs button{background:none;border:0;border-radius:7px;padding:8px 10px;color:#999db2;font-size:10px}
+.tabs button.active{background:#302748;color:#d0c0ff}
+.posts{display:grid;gap:16px;margin-top:17px}
+.post{padding:17px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+.post-head{display:flex;align-items:center;gap:10px}
+.post-avatar{width:39px;height:39px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(135deg,#252b4a,#392747);font-size:21px}
+.post-user{display:grid;gap:4px}
+.post-user strong{font-size:12px}
+.post-user small,.post-meta{font-size:10px;color:#8f94aa}
+.more{margin-left:auto;background:none;border:0;color:#a1a5ba}
+.post-text{font-size:12px;line-height:1.8;margin:15px 0;color:#e0e0ef;white-space:pre-wrap}
+.post-image{width:100%;max-height:430px;object-fit:cover;border-radius:10px;display:block}
+.category{display:inline-block;margin-top:10px;padding:6px 8px;background:#8b5cf618;border-radius:6px;color:#bba7ff;font-size:10px}
+.stats{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding:12px 0;color:#9398ad;font-size:10px}
+.stats button{border:0;background:none;color:inherit;font-size:10px}
+.post-actions{display:flex;align-items:center;gap:18px;padding-top:12px}
+.post-actions button{display:flex;align-items:center;gap:6px;background:none;border:0;color:#a4a7bb;font-size:10px}
+.post-actions button:hover,.post-actions .liked,.post-actions .saved{color:#e29cff}
+.post-actions .save{margin-left:auto}
+.rightbar{position:sticky;top:0;height:100vh;overflow:auto;padding:25px 17px;border-left:1px solid var(--line);background:#0e101b}
+.profile-mini{display:flex;align-items:center;gap:10px;padding:20px 0;border-bottom:1px solid var(--line)}
+.profile-mini .post-avatar{width:37px;height:37px}
+.profile-mini>div:nth-child(2){display:grid;gap:5px;flex:1}
+.profile-mini strong{font-size:11px}
+.profile-mini small{font-size:10px;color:#858aa0}
+.join,.promo{padding:17px;margin-top:18px;border:1px solid #50417077;border-radius:13px;background:linear-gradient(145deg,#211a35,#141522)}
+.join h3,.promo h3{font:600 16px 'Space Grotesk';margin:13px 0 7px}
+.join p,.promo p{font-size:11px;line-height:1.7;color:#a0a3b8}
+.full{width:100%;margin-top:10px}
+.side-section{margin-top:27px}
+.side-section h3{font:600 13px 'Space Grotesk'}
+.trend{display:grid;gap:5px;width:100%;padding:12px 2px;text-align:left;background:none;border:0;border-bottom:1px solid var(--line)}
+.trend strong{font-size:11px;color:#c6b3ff}
+.trend small{font-size:10px;color:#858aa0}
+.promo button{background:none;border:0;color:#bba8ff;font-size:10px;padding:0}
+.page{padding-top:18px;min-height:70vh}
+.page-title{margin:12px 0}
+.page-desc{font-size:12px;color:#a1a5bb;line-height:1.8}
+.awards-hero{padding:22px;border:1px solid #5d4a8566;border-radius:14px;background:radial-gradient(ellipse at right,#8758b538,transparent 60%),#171427;margin:20px 0}
+.awards-hero h2{font:600 23px 'Space Grotesk';margin:8px 0}
+.awards-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.award{padding:17px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(145deg,#171928,#111320)}
+.award .emoji{font-size:27px}
+.award h3{font:700 14px 'Space Grotesk';letter-spacing:1px;margin:12px 0 6px}
+.award p{min-height:30px;font-size:10px;color:#a0a3b8;line-height:1.7}
+.award button{background:none;border:0;color:#b7a3ff;padding:0;font-size:10px}
+.empty{min-height:230px;display:grid;align-content:center;justify-items:center;text-align:center;padding:25px;border:1px dashed #34364b;border-radius:14px;color:#a2a6bb}
+.empty .emoji{font-size:32px}
+.empty h3{font:600 17px 'Space Grotesk';color:#eee;margin-bottom:3px}
+.empty p{font-size:11px;line-height:1.8;max-width:350px}
+.profile-cover{height:125px;border-radius:12px;background:radial-gradient(ellipse at 75% 10%,#9a65f7,transparent 50%),linear-gradient(120deg,#242d55,#3a2551)}
+.profile-details{padding:0 20px 22px}
+.profile-big-avatar{width:65px;height:65px;margin-top:-30px;border:4px solid var(--panel);border-radius:20px;background:linear-gradient(135deg,#5865f2,#a855f7);display:grid;place-items:center;font-size:27px;font-weight:bold}
+.profile-details h2{font:600 21px 'Space Grotesk'}
+.profile-stats{display:flex;gap:24px;margin:20px 0}
+.profile-stats span{font-size:10px;color:#a3a6ba}
+.profile-stats b{display:block;color:white;font-size:16px;margin-bottom:4px}
+.settings{display:grid;gap:10px}
+.setting{display:flex;align-items:center;gap:13px;text-align:left;padding:16px;border:1px solid var(--line);border-radius:11px;background:var(--panel)}
+.setting span{flex:1}
+.setting strong{display:block;font-size:12px}
+.setting small{display:block;color:#999db2;font-size:10px;margin-top:5px}
+.footer{display:flex;justify-content:space-between;gap:10px;padding:30px 0 20px;color:#71768c;font-size:9px}
+.modal-bg{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;padding:16px;background:#05060bdc;backdrop-filter:blur(8px)}
+.modal-bg.show{display:flex}
+.modal{position:relative;width:min(100%,470px);max-height:90vh;overflow:auto;padding:27px;border:1px solid #3b3753;border-radius:17px;background:#131523;box-shadow:0 30px 100px #0009}
+.close{position:absolute;right:15px;top:12px;border:0;background:none;color:#aaa}
+.modal h2{font:600 24px 'Space Grotesk';margin:15px 0 7px}
+.modal p{font-size:12px;line-height:1.7;color:#a2a5ba}
+.field{display:grid;gap:7px;margin:15px 0;font-size:11px;color:#d7d7e6}
+.field input,.field textarea{width:100%;padding:12px;border:1px solid #34364b;border-radius:9px;background:#0c0e18;color:white}
+.field textarea{min-height:130px;resize:vertical}
+.modal-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:15px}
+.modal-actions small{color:#9397ac;font-size:10px}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:40;background:#211c36;border:1px solid #554475;border-radius:11px;padding:13px 18px;font-size:12px;box-shadow:0 10px 40px #0009;max-width:90%;text-align:center}
+.hidden{display:none!important}
+@media(max-width:1200px){.app{grid-template-columns:205px minmax(0,1fr)}.rightbar{display:none}}
+@media(max-width:700px){.app{display:block}.sidebar{position:fixed;width:255px;left:0;transform:translateX(-105%);transition:transform .2s;box-shadow:15px 0 45px #0008}.sidebar.open{transform:translateX(0)}.mobile-menu{display:inline-flex}.topbar{height:62px;padding:0 12px;gap:6px}.top-actions{gap:3px}.content{padding:18px 12px 0}.hero{padding:22px 17px;min-height:245px}.hero-content{max-width:100%}.hero h1{font-size:28px;max-width:300px}.hero p{max-width:240px}.planet{right:-52px;opacity:.42}.tabs{width:100%}.tabs button{flex:1;padding:8px 3px}.section-head{align-items:flex-start}.awards-grid{gap:8px}.award{padding:12px}.post{padding:13px}.post-actions{gap:12px}.post-actions button{gap:4px}.footer{flex-wrap:wrap}.modal{padding:23px 18px}}
+@media(max-width:390px){.search{padding:8px}.search input{font-size:11px}.topbar{padding:0 7px}.awards-grid{grid-template-columns:1fr}.post-actions{gap:9px}.post-actions button{font-size:9px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+  <div class="brand"><span class="logo">U</span><span>UNORA<b>.</b></span></div>
+  <button class="primary create" onclick="openModal('create')">＋ Crear publicación</button>
+  <div class="label">TU ESPACIO</div>
+  <nav class="nav" id="nav"></nav>
+  <div class="sidebar-foot">● UNORA está creciendo<br><br>Tu mundo. Tu gente. · BETA</div>
+</aside>
+<main class="main">
+<header class="topbar">
+  <button class="icon-btn mobile-menu" onclick="document.getElementById('sidebar').classList.toggle('open')" aria-label="Abrir menú">☰</button>
+  <div class="search">⌕ <input id="search" placeholder="Buscar personas, publicaciones..." oninput="searchPosts(this.value)"></div>
+  <div class="top-actions">
+    <button class="language" onclick="toggleLanguage()" id="lang">ES ⇄ EN</button>
+    <button class="icon-btn" onclick="go('notifications')" aria-label="Notificaciones">♧</button>
+    <button class="avatar" onclick="go('profile')" id="topAvatar">U</button>
+  </div>
+</header>
+<div class="content" id="content"></div>
+</main>
+<aside class="rightbar">
+  <div class="eyebrow">TU UNIVERSO</div>
+  <div class="profile-mini"><div class="post-avatar" id="miniAvatar">✦</div><div><strong id="miniName">Tu espacio</strong><small id="miniHandle">Personaliza tu universo</small></div><button class="icon-btn" onclick="go('profile')">›</button></div>
+  <div class="join" id="join"><div class="eyebrow">TU HISTORIA EMPIEZA AQUÍ</div><h3>Tu gente está aquí.</h3><p>Únete a una comunidad donde cada perspectiva cuenta.</p><button class="primary full" onclick="openModal('register')">Crear cuenta</button><button class="text-button" style="width:100%;margin-top:12px" onclick="openModal('login')">Iniciar sesión</button></div>
+  <div class="side-section"><h3>🔥 En tendencia</h3>
+    <button class="trend" onclick="searchTag('UNORA')"><strong>#UNORA</strong><small>2.4k publicaciones</small></button>
+    <button class="trend" onclick="searchTag('CreativeLife')"><strong>#CreativeLife</strong><small>1.8k publicaciones</small></button>
+    <button class="trend" onclick="searchTag('NewPerspectives')"><strong>#NewPerspectives</strong><small>946 publicaciones</small></button>
+  </div>
+  <div class="promo"><div class="eyebrow">PRÓXIMAMENTE</div><h3>Los UNORA Awards</h3><p>Celebramos a las personas que hacen de internet un lugar mejor.</p><button onclick="go('awards')">Explorar premios →</button></div>
+</aside>
+</div>
+<div class="modal-bg" id="modalBg" onclick="if(event.target===this)closeModal()">
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="close" onclick="closeModal()" aria-label="Cerrar">✕</button>
+    <div class="eyebrow">✦ TU UNIVERSO, TU VOZ</div>
+    <h2 id="modalTitle">UNORA</h2>
+    <div id="modalBody"></div>
+  </section>
+</div>
+<div id="toast" class="toast hidden" role="status"></div>
+<script>
+const navItems=[
+ ["home","⌂","Inicio"],["explore","⌕","Explorar"],["shorts","▷","Shorts"],
+ ["live","◉","Directos"],["messages","✉","Mensajes"],["notifications","♧","Notificaciones"],
+ ["communities","♧","Comunidades"],["challenges","ϟ","Retos"],["map","◎","Mapa mundial"],
+ ["awards","♛","UNORA Awards"],["saved","▣","Guardados"],["creator","✦","Estudio de creador"],
+ ["profile","◉","Mi perfil"],["settings","⚙","Configuración"],["help","?","Ayuda"]
+];
+const awards=[
+ ["STAR","La persona que más brilla","⭐"],["CONNECT","Quien conecta a la comunidad","🤝"],
+ ["CREATOR","Mejor creador o creadora","🎨"],["COMMUNITY","La comunidad del año","🌐"],
+ ["VIRAL","El contenido más viral","🔥"],["IMPACT","Mayor impacto positivo","💜"],
+ ["LEGEND","Una leyenda de UNORA","👑"],["DISCOVERY","El gran descubrimiento","🔭"]
+];
+let page="home",language="es",tab="Para ti",query="",signedIn=false,displayName="",username="",email="",password="",step=1;
+let posts=[
+{id:1,user:"Luna García",handle:"lunacreates",avatar:"🌙",text:"A veces, los mejores recuerdos nacen de los planes que no estaban planeados. ✨",image:"https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=85",likes:2480,comments:86,liked:false,category:"Fotografía"},
+{id:2,user:"Alex Rivera",handle:"alexexplores",avatar:"🏔️",text:"Un lugar nuevo. Una perspectiva distinta. ¿Cuál es el próximo destino? 🌍",image:"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85",likes:964,comments:42,liked:false,category:"Viajes"},
+{id:3,user:"Mía Studio",handle:"miastudio",avatar:"🎨",text:"Creando cosas que antes solo existían en mi imaginación. #Creatividad #UNORA",likes:531,comments:19,liked:false,category:"Arte"}
+];
+let saved=[],modalType="",registration={name:"",username:"",email:"",password:""},storyNames=[["🌅","Luna"],["🪩","Alex"],["🌿","Mía"],["🎧","Dani"],["🪐","Noah"],["🧋","Sara"]];
+function escapeHTML(value){return String(value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function notify(message){const el=document.getElementById("toast");el.textContent=message;el.classList.remove("hidden");clearTimeout(notify.timer);notify.timer=setTimeout(()=>el.classList.add("hidden"),3000)}
+function buildNav(){document.getElementById("nav").innerHTML=navItems.map(([id,icon,label])=>`<button data-page="${id}" class="${page===id?"active":""}" onclick="go('${id}')"><span class="ico">${icon}</span>${label}</button>`).join("")}
+function go(next){page=next;query="";document.getElementById("search").value="";document.getElementById("sidebar").classList.remove("open");buildNav();render()}
+function searchPosts(value){query=value;page=value?"explore":"home";buildNav();render()}
+function searchTag(tag){document.getElementById("search").value=tag;searchPosts(tag)}
+function toggleLanguage(){language=language==="es"?"en":"es";document.getElementById("lang").textContent=language==="es"?"ES ⇄ EN":"EN ⇄ ES";render()}
+function openModal(type){modalType=type;document.getElementById("modalBg").classList.add("show");renderModal()}
+function closeModal(){document.getElementById("modalBg").classList.remove("show")}
+function renderStories(){return `<section class="section"><div class="section-head"><div><h2>Historias</h2><p>Momentos de tu universo</p></div><button class="text-button" onclick="notify('Las historias de 24 horas requieren almacenamiento y servidor.')">Ver todas →</button></div><div class="stories"><button class="story add" onclick="openModal('create')"><span class="story-ring"> <span class="story-face">＋</span></span>Tu historia</button>${storyNames.map(([emoji,name],i)=>`<button class="story" onclick="notify('Las historias estarán disponibles al conectar el backend.')"><span class="story-ring" style="background:linear-gradient(135deg,hsl(${i*53+210} 80% 65%),#c66bea)"><span class="story-face">${emoji}</span></span>${name}</button>`).join("")}</div></section>`}
+function renderPost(p){return `<article class="post"><div class="post-head"><div class="post-avatar">${escapeHTML(p.avatar)}</div><div class="post-user"><strong>${escapeHTML(p.user)} <span style="color:#a99aff">✦</span></strong><small>@${escapeHTML(p.handle)} · hace un momento</small></div><button class="more" onclick="notify('Las opciones avanzadas se habilitarán en la siguiente versión.')">•••</button></div><p class="post-text">${escapeHTML(p.text)}</p>${p.image?`<img class="post-image" src="${p.image}" alt="Imagen de la publicación" loading="lazy" onerror="this.style.display='none'">`:""}<span class="category">✦ ${escapeHTML(p.category)}</span><div class="stats"><span>${p.likes.toLocaleString()} me gusta</span><button onclick="notify('Los comentarios reales requieren una base de datos.')">${p.comments} comentarios</button></div><div class="post-actions"><button class="${p.liked?"liked":""}" onclick="likePost(${p.id})">${p.liked?"♥":"♡"} Me gusta</button><button onclick="notify('Los comentarios estarán disponibles al conectar el backend.')">◯ Comentar</button><button onclick="sharePost(${p.id})">↗ Compartir</button><button class="save ${saved.includes(p.id)?"saved":""}" onclick="savePost(${p.id})">${saved.includes(p.id)?"▣":"▢"}</button></div></article>`}
+function likePost(id){posts=posts.map(p=>p.id===id?{...p,liked:!p.liked,likes:p.likes+(p.liked?-1:1)}:p);render()}
+function savePost(id){saved=saved.includes(id)?saved.filter(x=>x!==id):[...saved,id];notify(saved.includes(id)?"Publicación guardada":"Publicación eliminada de guardados");render()}
+async function sharePost(id){const url=location.href.split("#")[0]+"#post-"+id;try{await navigator.clipboard.writeText(url);notify("Enlace copiado")}catch{notify("Copia este enlace: "+url)}}
+function renderHome(){let shown=posts.filter(p=>(p.text+" "+p.user+" "+p.handle+" "+p.category).toLowerCase().includes(query.toLowerCase()));return `<section class="hero"><div class="hero-content"><span class="eyebrow">✦ TU COMUNIDAD, TU UNIVERSO</span><h1>${language==="es"?"Tu mundo, en un solo lugar":"Your world, all in one place"}<span class="gradient">.</span></h1><p>${language==="es"?"Un lugar para expresarte, descubrir y conectar.":"A place to express yourself, discover and connect."}</p><div class="hero-actions"><button class="primary" onclick="openModal('create')">＋ Crear publicación</button><button class="secondary" onclick="go('explore')">⌕ Explorar</button></div></div><div class="planet">U</div></section>${renderStories()}<section class="section"><div class="section-head"><div><h2>Tu feed</h2><p>Ideas, historias y personas que inspiran.</p></div><div class="tabs">${["Para ti","Siguiendo","Tendencias"].map(t=>`<button class="${tab===t?"active":""}" onclick="tab='${t}';render()">${t}</button>`).join("")}</div></div><div class="posts">${shown.length?shown.map(renderPost).join(""):'<div class="empty"><div class="emoji">⌕</div><h3>No encontramos resultados</h3><p>Prueba con otra búsqueda.</p></div>'}</div></section>`}
+function renderAwards(){return `<div class="awards-hero"><div class="eyebrow">✦ 31 DE DICIEMBRE</div><h2>UNORA Awards 2026</h2><p>Ocho categorías. Una comunidad. Momentos inolvidables.</p></div><div class="awards-grid">${awards.map(([name,desc,emoji],i)=>`<article class="award"><span class="muted">0${i+1}</span><div class="emoji">${emoji}</div><h3>${name}</h3><p>${desc}</p><button onclick="notify('Las nominaciones y votaciones se activarán con cuentas verificadas.')">Descubrir categoría →</button></article>`).join("")}</div>`}
+function emptyPage(icon,title,text){return `<div class="empty"><div class="emoji">${icon}</div><h3>${title}</h3><p>${text}</p></div>`}
+function renderProfile(){return `<div class="profile-cover"></div><div class="profile-details"><div class="profile-big-avatar">${signedIn?escapeHTML(displayName[0].toUpperCase()):"U"}</div><h2>${signedIn?escapeHTML(displayName):"Tu próximo capítulo empieza aquí"}</h2><p class="muted">@${signedIn?escapeHTML(username):"tuusuario"}</p><div class="profile-stats"><span><b>${posts.filter(p=>p.handle===username).length}</b>publicaciones</span><span><b>0</b>seguidores</span><span><b>0</b>siguiendo</span></div>${signedIn?"":'<button class="primary" onclick="openModal(\\'register\\')">Crear cuenta</button>'}</div>`}
+function render(){buildNav();const c=document.getElementById("content");if(page==="home")c.innerHTML=renderHome();else if(page==="explore"){let list=posts.filter(p=>(p.text+" "+p.user+" "+p.handle+" "+p.category).toLowerCase().includes(query.toLowerCase()));c.innerHTML=`<div class="page"><div class="eyebrow">✦ DESCUBRE UNORA</div><h1 class="page-title">Explorar</h1><p class="page-desc">Encuentra ideas, personas y nuevas perspectivas.</p><div class="posts">${list.length?list.map(renderPost).join(""):emptyPage("⌕","No hay resultados","Prueba con otra palabra.")}</div></div>`}else if(page==="awards")c.innerHTML=`<div class="page"><div class="eyebrow">✦ CELEBRAMOS LO EXTRAORDINARIO</div><h1 class="page-title">UNORA Awards</h1><p class="page-desc">La comunidad celebra el talento cada 31 de diciembre.</p>${renderAwards()}</div>`;else if(page==="saved")c.innerHTML=`<div class="page"><h1 class="page-title">Guardados</h1><div class="posts">${posts.filter(p=>saved.includes(p.id)).map(renderPost).join("")||emptyPage("▣","Tu colección está vacía","Guarda publicaciones para volver a ellas más tarde.")}</div></div>`;else if(page==="profile")c.innerHTML=`<div class="page"><h1 class="page-title">Mi perfil</h1><div class="post">${renderProfile()}</div></div>`;else if(page==="settings")c.innerHTML=`<div class="page"><h1 class="page-title">Configuración</h1><p class="page-desc">Personaliza tu experiencia.</p><div class="settings"><button class="setting" onclick="go('profile')"><span>👤<strong>Cuenta y perfil</strong><small>Tu nombre y usuario</small></span>›</button><button class="setting" onclick="notify('La privacidad real requiere autenticación y servidor.')"><span>🛡️<strong>Privacidad y seguridad</strong><small>Controla tu experiencia</small></span>›</button><button class="setting" onclick="toggleLanguage()"><span>🌐<strong>Idioma</strong><small>Cambiar idioma de interfaz</small></span>ES / EN</button></div></div>`;else{let info={shorts:["▷","UNORA Shorts","Vídeos cortos, creatividad y nuevas perspectivas."],live:["◉","Directos","Tu escenario te espera. Las retransmisiones requieren un servicio de vídeo en tiempo real."],messages:["✉","Mensajes","Tus conversaciones privadas estarán aquí cuando se conecte la mensajería segura."],notifications:["♧","Notificaciones","Cuando haya actividad en tu cuenta, la verás aquí."],communities:["♧","Comunidades","Encuentra a tu gente y comparte tus intereses."],challenges:["ϟ","Retos","Acepta desafíos creativos y participa con tu comunidad."],map:["◎","Mapa mundial","Las ubicaciones solo se mostrarán con consentimiento explícito. El mapa real necesita un proveedor geográfico."],creator:["✦","Estudio de creador","Estadísticas, audiencia y herramientas para creadores."],help:["?","Centro de ayuda","Seguridad, reportes, normas y soporte."]}[page];c.innerHTML=`<div class="page"><div class="eyebrow">✦ EXPLORA UNORA</div><h1 class="page-title">${info?info[1]:page}</h1>${emptyPage(info?info[0]:"✦",info?info[1]:"Próximamente",info?info[2]:"Esta sección formará parte de UNORA.")}</div>`}c.insertAdjacentHTML("beforeend",'<footer class="footer"><span>© 2026 UNORA</span><span>Tu mundo. Tu gente.</span><span>UNORA BETA</span></footer>');document.getElementById("miniName").textContent=signedIn?displayName:"Tu espacio";document.getElementById("miniHandle").textContent=signedIn?"@"+username:"Personaliza tu universo";document.getElementById("miniAvatar").textContent=signedIn?displayName[0].toUpperCase():"✦";document.getElementById("topAvatar").textContent=signedIn?displayName[0].toUpperCase():"U";document.getElementById("join").classList.toggle("hidden",signedIn)}
+function renderModal(){const title=document.getElementById("modalTitle"),body=document.getElementById("modalBody");if(modalType==="create"){title.textContent="Crear publicación";body.innerHTML=`<p>Comparte algo con tu universo.</p><label class="field">¿Qué quieres compartir?<textarea id="draft" maxlength="2000" placeholder="Escribe tu publicación..."></textarea></label><div class="modal-actions"><small>Máximo 2.000 caracteres</small><button class="primary" onclick="publish()">Publicar ↗</button></div>`}else if(modalType==="register"){title.textContent=step===1?"Crea tu cuenta":step===2?"Tu identidad en UNORA":"Confirma tu perfil";if(step===1)body.innerHTML=`<p>Paso 1 de 3 · Tus datos de acceso.</p><label class="field">Correo electrónico<input id="regEmail" type="email" autocomplete="email" placeholder="tu@email.com" value="${escapeHTML(registration.email)}"></label><label class="field">Contraseña<input id="regPassword" type="password" autocomplete="new-password" placeholder="Mínimo 8 caracteres" value="${escapeHTML(registration.password)}"></label><button class="primary full" onclick="nextRegister()">Continuar →</button>`;else if(step===2)body.innerHTML=`<p>Paso 2 de 3 · Cómo te conocerá la comunidad.</p><label class="field">Nombre visible<input id="regName" maxlength="50" placeholder="Tu nombre" value="${escapeHTML(registration.name)}"></label><label class="field">Nombre de usuario<input id="regUser" maxlength="20" placeholder="tuusuario" value="${escapeHTML(registration.username)}"></label><p>Entre 3 y 20 caracteres: letras, números, punto y guion bajo.</p><div class="modal-actions"><button class="secondary" onclick="step=1;renderModal()">← Volver</button><button class="primary" onclick="nextRegister()">Continuar →</button></div>`;else body.innerHTML=`<p>Paso 3 de 3 · Revisa tu perfil de demostración.</p><p>Correo: <strong>${escapeHTML(registration.email)}</strong></p><p>Nombre: <strong>${escapeHTML(registration.name)}</strong></p><p>Usuario: <strong>@${escapeHTML(registration.username)}</strong></p><p>Esta demostración no crea una cuenta real ni almacena tu contraseña en un servidor.</p><div class="modal-actions"><button class="secondary" onclick="step=2;renderModal()">← Volver</button><button class="primary" onclick="finishRegister()">Crear perfil</button></div>`}else if(modalType==="login"){title.textContent="Bienvenido de nuevo";body.innerHTML=`<p>El inicio de sesión real requiere un proveedor de autenticación.</p><label class="field">Correo electrónico<input id="loginEmail" type="email" placeholder="tu@email.com"></label><label class="field">Contraseña<input id="loginPassword" type="password" placeholder="Tu contraseña"></label><button class="primary full" onclick="notify('El inicio de sesión no está conectado a un servidor.');">Iniciar sesión</button><button class="text-button" onclick="step=1;openModal('register')">Crear cuenta</button>`}}
+function nextRegister(){if(step===1){registration.email=document.getElementById("regEmail").value.trim();registration.password=document.getElementById("regPassword").value;if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(registration.email)||registration.password.length<8){notify("Introduce un correo válido y una contraseña de al menos 8 caracteres.");return}step=2}else if(step===2){registration.name=document.getElementById("regName").value.trim();registration.username=document.getElementById("regUser").value.trim();if(!registration.name||!/^[a-zA-Z0-9_.]{3,20}$/.test(registration.username)){notify("Comprueba el nombre y el usuario (3-20 caracteres).");return}step=3}renderModal()}
+function finishRegister(){displayName=registration.name;username=registration.username;signedIn=true;closeModal();render();notify("Perfil de demostración creado para esta sesión.")}
+function publish(){const text=document.getElementById("draft")?.value.trim();if(!text){notify("Escribe algo antes de publicar.");return}posts.unshift({id:Date.now(),user:signedIn?displayName:"Invitado",handle:signedIn?username:"invitado",avatar:"✨",text,likes:0,comments:0,liked:false,category:"Comunidad"});closeModal();go("home");notify("¡Publicación creada en esta sesión!")}
+render();
+</script>
+</body>
+</html>
