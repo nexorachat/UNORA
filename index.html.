@@ -2,210 +2,64 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#07091b">
-  <meta name="description" content="UNORA: Tu mundo. Tu gente. Descubre personas y comparte momentos.">
   <title>UNORA — Tu mundo. Tu gente.</title>
   <link rel="stylesheet" href="./styles.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="./config.js"></script>
-  <script src="./app.js" defer></script>
 </head>
 <body>
-  <div class="ambient ambient-one"></div>
-  <div class="ambient ambient-two"></div>
-
   <header class="topbar">
-    <a class="brand" href="#" data-home aria-label="UNORA inicio">
-      <span class="brand-mark">U</span>
+    <a class="brand" href="./index.html">
+      <span class="brand-logo">U</span>
       <span>UNORA</span>
     </a>
-    <span class="top-tagline">Tu mundo. Tu gente. <span>◎</span></span>
+    <span class="tagline">Tu mundo. Tu gente.</span>
   </header>
 
-  <main>
-    <!-- BIENVENIDA -->
-    <section id="welcome" class="screen welcome-screen">
-      <div class="float-card float-left-top">
-        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop" alt="Retrato de una creadora">
-        <span>Momentos reales ✦</span>
+  <main class="hero">
+    <div class="preview preview-left">
+      <img src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=600&auto=format&fit=crop" alt="Paisaje compartido">
+      <p>Momentos que nos unen 💜</p>
+    </div>
+
+    <div class="preview preview-right">
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&auto=format&fit=crop" alt="Descubre nuevos lugares">
+      <p>Descubre el mundo ✦</p>
+    </div>
+
+    <section class="hero-content">
+      <div class="hero-symbol">U</div>
+      <h1>UNORA</h1>
+      <h2>Descubre personas.<br>Vive momentos.<br><span>En un solo lugar.</span></h2>
+      <p class="description">
+        La red social donde el mundo se encuentra,
+        comparte y se inspira.
+      </p>
+
+      <div class="actions">
+        <button id="create-account" class="button primary">Crear cuenta <span>→</span></button>
+        <button id="login" class="button secondary">Iniciar sesión</button>
       </div>
-
-      <div class="float-card float-left-bottom social-preview">
-        <div class="preview-head">
-          <span class="mini-avatar">M</span>
-          <span><b>maria.s</b><small> · hace 2 h</small></span>
-        </div>
-        <p>La vida es mejor cuando la compartes 💜</p>
-        <img src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=700&auto=format&fit=crop" alt="Paisaje al atardecer">
-        <div class="preview-actions">♥ 4,2K　♡ 128　↗</div>
-      </div>
-
-      <div class="float-card float-right-top profile-preview">
-        <img class="profile-photo" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=180&auto=format&fit=crop" alt="Perfil">
-        <h3>Alex Torres <span class="verified">✓</span></h3>
-        <p>@alextorres</p>
-        <div class="profile-stats">
-          <span><b>1,2K</b><small>Publicaciones</small></span>
-          <span><b>856K</b><small>Seguidores</small></span>
-        </div>
-        <span class="mini-follow">Seguir</span>
-      </div>
-
-      <div class="float-card float-right-bottom video-preview">
-        <img src="https://images.unsplash.com/photo-1520045892732-304bc3ac5d8e?w=600&auto=format&fit=crop" alt="Momento de aventura">
-        <span class="play-icon">▶</span>
-        <b>Descubre nuevos momentos</b>
-      </div>
-
-      <div class="hero-content">
-        <div class="hero-logo"><span>U</span></div>
-        <h1>UNORA</h1>
-        <h2>Descubre personas.<br>Vive momentos.<br><span>En un solo lugar.</span></h2>
-        <p class="hero-copy">La red social donde el mundo se encuentra,<br class="desktop-only"> comparte y se inspira.</p>
-        <div class="hero-buttons">
-          <button class="button button-primary" data-go="signup">Crear cuenta <span>→</span></button>
-          <button class="button button-outline" data-go="login">Iniciar sesión</button>
-        </div>
-        <p class="social-caption">Tu próximo momento empieza aquí.</p>
-      </div>
-      <div class="globe-line" aria-hidden="true"></div>
-    </section>
-
-    <!-- REGISTRO -->
-    <section id="signup" class="screen auth-screen hidden">
-      <button class="back-button" data-go="welcome">← Volver al inicio</button>
-      <div class="auth-card">
-        <div class="auth-logo">U</div>
-        <p class="eyebrow">TU MUNDO TE ESPERA</p>
-        <h2>Crea tu cuenta</h2>
-        <p class="muted">Únete a una comunidad sin fronteras.</p>
-        <form id="signup-form">
-          <label for="signup-name">Nombre</label>
-          <input id="signup-name" name="name" autocomplete="name" placeholder="Tu nombre" required maxlength="60">
-          <label for="signup-email">Correo electrónico</label>
-          <input id="signup-email" name="email" type="email" autocomplete="email" placeholder="tu@email.com" required>
-          <label for="signup-password">Contraseña</label>
-          <input id="signup-password" name="password" type="password" autocomplete="new-password" placeholder="Mínimo 8 caracteres" minlength="8" required>
-          <button class="button button-primary full-width" type="submit">Crear cuenta <span>→</span></button>
-          <p id="signup-message" class="form-message" role="status"></p>
-        </form>
-        <p class="switch-auth">¿Ya tienes cuenta? <button data-go="login">Inicia sesión</button></p>
-      </div>
-    </section>
-
-    <!-- INICIO DE SESIÓN -->
-    <section id="login" class="screen auth-screen hidden">
-      <button class="back-button" data-go="welcome">← Volver al inicio</button>
-      <div class="auth-card">
-        <div class="auth-logo">U</div>
-        <p class="eyebrow">QUÉ BUENO TENERTE AQUÍ</p>
-        <h2>Bienvenido de nuevo</h2>
-        <p class="muted">Tus momentos te están esperando.</p>
-        <form id="login-form">
-          <label for="login-email">Correo electrónico</label>
-          <input id="login-email" type="email" autocomplete="email" placeholder="tu@email.com" required>
-          <label for="login-password">Contraseña</label>
-          <input id="login-password" type="password" autocomplete="current-password" placeholder="Tu contraseña" required>
-          <button class="button button-primary full-width" type="submit">Iniciar sesión <span>→</span></button>
-          <p id="login-message" class="form-message" role="status"></p>
-        </form>
-        <p class="switch-auth">¿Todavía no tienes cuenta? <button data-go="signup">Regístrate</button></p>
-      </div>
-    </section>
-
-    <!-- CONFIGURACIÓN DE PERFIL -->
-    <section id="profile-setup" class="screen auth-screen hidden">
-      <div class="auth-card profile-setup-card">
-        <div class="auth-logo">U</div>
-        <p class="eyebrow">PASO 2 · TU IDENTIDAD</p>
-        <h2>Crea tu perfil</h2>
-        <p class="muted">Así te conocerá la comunidad de UNORA.</p>
-        <form id="profile-form">
-          <label for="profile-name">Nombre visible</label>
-          <input id="profile-name" placeholder="Cómo quieres que te llamen" maxlength="60" required>
-          <label for="profile-username">Nombre de usuario</label>
-          <div class="username-input"><span>@</span><input id="profile-username" placeholder="tuusuario" minlength="3" maxlength="24" pattern="[A-Za-z0-9_]+" required></div>
-          <label for="profile-bio">Biografía <span class="optional">(opcional)</span></label>
-          <textarea id="profile-bio" placeholder="Cuenta un poco sobre ti..." maxlength="160" rows="3"></textarea>
-          <label for="profile-avatar">Foto de perfil <span class="optional">(opcional)</span></label>
-          <input id="profile-avatar" type="url" placeholder="https://... (enlace a tu foto)">
-          <button class="button button-primary full-width" type="submit">Entrar en UNORA MOMENTS →</button>
-          <p id="profile-message" class="form-message" role="status"></p>
-        </form>
-      </div>
-    </section>
-
-    <!-- APP SOCIAL -->
-    <section id="moments" class="screen app-screen hidden">
-      <header class="app-header">
-        <a class="brand app-brand" href="#" data-app-home><span class="brand-mark">U</span><span>UNORA</span></a>
-        <div class="header-actions">
-          <button class="icon-button" aria-label="Buscar" data-tab="discover">⌕</button>
-          <button class="icon-button" aria-label="Cerrar sesión" id="logout-button">↗</button>
-        </div>
-      </header>
-
-      <div class="app-layout">
-        <aside class="side-nav">
-          <button class="nav-item active" data-tab="feed">⌂ <span>Inicio</span></button>
-          <button class="nav-item" data-tab="discover">⌕ <span>Descubrir</span></button>
-          <button class="nav-item" data-tab="videos">▷ <span>Vídeos</span></button>
-          <button class="nav-item" data-tab="awards">✧ <span>UNORA Awards</span></button>
-          <button class="nav-item" data-tab="my-profile">◉ <span>Mi perfil</span></button>
-          <div class="side-tagline">Tu mundo. Tu gente.</div>
-        </aside>
-
-        <div class="feed-column">
-          <div class="feed-heading">
-            <div><p class="eyebrow">EL MUNDO SE ENCUENTRA AQUÍ</p><h2 id="feed-title">UNORA MOMENTS</h2></div>
-            <span class="live-dot">● En comunidad</span>
-          </div>
-
-          <div class="story-strip" id="story-strip">
-            <div class="story"><div class="story-ring add-story">＋</div><span>Tu momento</span></div>
-            <div class="story"><div class="story-ring"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop" alt=""></div><span>Sofía</span></div>
-            <div class="story"><div class="story-ring"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop" alt=""></div><span>Alex</span></div>
-            <div class="story"><div class="story-ring"><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=100&auto=format&fit=crop" alt=""></div><span>María</span></div>
-            <div class="story"><div class="story-ring"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&auto=format&fit=crop" alt=""></div><span>Daniel</span></div>
-          </div>
-
-          <form id="post-form" class="composer">
-            <div class="composer-avatar" id="composer-avatar">U</div>
-            <div class="composer-main">
-              <textarea id="post-text" maxlength="1000" placeholder="¿Qué momento quieres compartir?" rows="2" required></textarea>
-              <div class="composer-footer"><span id="post-message" class="form-message" role="status"></span><button class="button button-primary post-button" type="submit">Publicar</button></div>
-            </div>
-          </form>
-
-          <div id="feed-list" class="feed-list" aria-live="polite"></div>
-          <div id="empty-feed" class="empty-state"><div class="empty-icon">✧</div><h3>Tu mundo empieza aquí</h3><p>Publica tu primer momento y conecta con la comunidad.</p></div>
-        </div>
-
-        <aside class="right-panel">
-          <div class="side-card">
-            <p class="eyebrow">DESCUBRE</p><h3>El mundo está lleno de historias.</h3>
-            <p class="muted">Encuentra nuevas personas, ideas y experiencias.</p>
-            <button class="text-link" data-tab="discover">Explorar momentos →</button>
-          </div>
-          <div class="side-card awards-card">
-            <p class="eyebrow">CADA 31 DE DICIEMBRE</p><h3>UNORA Awards</h3>
-            <p class="muted">Celebramos a quienes hacen especial nuestra comunidad.</p>
-            <button class="text-link" data-tab="awards">Conocer las categorías →</button>
-          </div>
-          <p class="legal-note">UNORA · Tu mundo. Tu gente.</p>
-        </aside>
-      </div>
-
-      <nav class="mobile-nav" aria-label="Navegación principal">
-        <button class="active" data-tab="feed" aria-label="Inicio">⌂</button>
-        <button data-tab="discover" aria-label="Descubrir">⌕</button>
-        <button data-tab="videos" aria-label="Vídeos">▷</button>
-        <button data-tab="awards" aria-label="Awards">✧</button>
-        <button data-tab="my-profile" aria-label="Mi perfil">◉</button>
-      </nav>
+      <p id="message" class="message" role="status"></p>
     </section>
   </main>
-  <div id="toast" class="toast" role="status"></div>
+
+  <footer>
+    <span>UNORA</span>
+    <span>Tu mundo. Tu gente.</span>
+  </footer>
+
+  <script>
+    const message = document.getElementById("message");
+
+    document.getElementById("create-account").addEventListener("click", () => {
+      message.textContent = "El registro se activará al conectar Supabase.";
+    });
+
+    document.getElementById("login").addEventListener("click", () => {
+      message.textContent = "El inicio de sesión se activará al conectar Supabase.";
+    });
+  </script>
 </body>
 </html>
