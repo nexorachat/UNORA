@@ -28,7 +28,7 @@ h1,h2,h3,p{margin:0}
     radial-gradient(ellipse 40% 50% at 100% 60%,rgba(47,123,255,.25),transparent 70%),
     var(--bg);
 }
-.hero::after{ /* Tierra iluminada */
+.hero::after{
   content:""; position:absolute; left:50%; bottom:-62vw; width:130vw; height:70vw; transform:translateX(-50%);
   border-radius:50%;
   background:radial-gradient(circle at 50% 0%,#1b2a8f 0%,#0b1050 35%,#05061a 70%);
@@ -68,7 +68,6 @@ h1,h2,h3,p{margin:0}
 .card.phone{width:min(300px,100%)}
 .card.profile,.card.photo{width:min(260px,100%)}
 
-/* Fotos de ejemplo hechas con CSS: sustitúyelas por imágenes reales en assets/ */
 .photo{border-radius:18px;min-height:130px}
 .photo-a{background:linear-gradient(160deg,#6b46c1,#e8a0bf 50%,#3b6fb6);width:170px!important;min-height:120px}
 .photo-sunset{background:linear-gradient(180deg,#5a3d8f,#e98aa0 45%,#f4b27a 60%,#2a2f55 62%,#1a1d44);min-height:190px;margin-top:8px}
