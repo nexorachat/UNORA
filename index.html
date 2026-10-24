@@ -40,8 +40,8 @@
     <p class="headline">Descubre personas.<br>Vive momentos.<br><em>En un solo lugar.</em></p>
     <p class="lead">La red social donde el mundo se encuentra, comparte y se inspira.</p>
     <div class="actions">
-      <a class="btn btn-primary" href="#acceso">Crear cuenta <span aria-hidden="true">→</span></a>
-      <a class="btn btn-ghost" href="#acceso">Iniciar sesión</a>
+      <a class="btn btn-primary" href="#acceso" data-open="signup">Crear cuenta <span aria-hidden="true">→</span></a>
+      <a class="btn btn-ghost" href="#acceso" data-open="login">Iniciar sesión</a>
     </div>
     <p class="muted">Registro con Google, Apple y Facebook próximamente</p>
   </div>
@@ -68,11 +68,69 @@
   </div>
 </section>
 
+<!-- ACCESO: visible si NO hay sesión -->
 <section class="access" id="acceso">
   <div class="access-card">
-    <h2>Entra en tu mundo</h2>
-    <p>El registro y el inicio de sesión se activarán cuando conectemos la autenticación. Mientras tanto, esta es la vista previa de UNORA.</p>
-    <a class="btn btn-primary" href="#inicio">Volver al inicio</a>
+    <div class="tabs" role="tablist">
+      <button type="button" class="tab active" data-tab="signup" role="tab">Crear cuenta</button>
+      <button type="button" class="tab" data-tab="login" role="tab">Iniciar sesión</button>
+    </div>
+
+    <form id="signup-form" class="form" autocomplete="on">
+      <label>Nombre visible
+        <input id="signup-name" type="text" maxlength="60" required autocomplete="name">
+      </label>
+      <label>Correo electrónico
+        <input id="signup-email" type="email" required autocomplete="email">
+      </label>
+      <label>Contraseña (mínimo 8 caracteres)
+        <input id="signup-password" type="password" minlength="8" required autocomplete="new-password">
+      </label>
+      <button class="btn btn-primary" type="submit">Crear cuenta</button>
+      <p class="msg" id="signup-msg" role="status"></p>
+    </form>
+
+    <form id="login-form" class="form" hidden>
+      <label>Correo electrónico
+        <input id="login-email" type="email" required autocomplete="email">
+      </label>
+      <label>Contraseña
+        <input id="login-password" type="password" required autocomplete="current-password">
+      </label>
+      <button class="btn btn-primary" type="submit">Iniciar sesión</button>
+      <button class="link" type="button" id="forgot-btn">¿Has olvidado tu contraseña?</button>
+      <p class="msg" id="login-msg" role="status"></p>
+    </form>
+
+    <form id="recovery-form" class="form" hidden>
+      <label>Nueva contraseña (mínimo 8 caracteres)
+        <input id="recovery-password" type="password" minlength="8" required autocomplete="new-password">
+      </label>
+      <button class="btn btn-primary" type="submit">Guardar contraseña</button>
+      <p class="msg" id="recovery-msg" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<!-- CUENTA: visible si HAY sesión -->
+<section class="access" id="cuenta" hidden>
+  <div class="access-card">
+    <h2 id="account-title">Tu perfil</h2>
+    <p id="account-sub">Cuéntanos quién eres para empezar.</p>
+    <form id="profile-form" class="form">
+      <label>Nombre visible
+        <input id="profile-name" type="text" maxlength="60" required>
+      </label>
+      <label>Nombre de usuario (3-24: letras minúsculas, números o _)
+        <input id="profile-username" type="text" maxlength="24" required autocapitalize="none" spellcheck="false">
+      </label>
+      <label>Biografía (máx. 160)
+        <textarea id="profile-bio" maxlength="160" rows="3"></textarea>
+      </label>
+      <button class="btn btn-primary" type="submit">Guardar perfil</button>
+      <p class="msg" id="profile-msg" role="status"></p>
+    </form>
+    <button class="btn btn-ghost" type="button" id="logout-btn">Cerrar sesión</button>
   </div>
 </section>
 </main>
@@ -82,5 +140,8 @@
   <span>© 2026 UNORA</span>
 </footer>
 
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
