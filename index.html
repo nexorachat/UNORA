@@ -7,6 +7,7 @@
 <title>UNORA | Tu mundo. Tu gente.</title>
 <meta name="description" content="UNORA: descubre personas, comparte tus momentos y conecta con el mundo.">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="app.css">
 </head>
 <body>
 
@@ -110,28 +111,69 @@
     </form>
   </div>
 </section>
-
-<section class="access" id="cuenta" hidden>
-  <div class="access-card">
-    <h2 id="account-title">Tu perfil</h2>
-    <p id="account-sub">Cuéntanos quién eres para empezar.</p>
-    <form id="profile-form" class="form">
-      <label>Nombre visible
-        <input id="profile-name" type="text" maxlength="60" required>
-      </label>
-      <label>Nombre de usuario (3-24: letras minúsculas, números o _)
-        <input id="profile-username" type="text" maxlength="24" required autocapitalize="none" spellcheck="false">
-      </label>
-      <label>Biografía (máx. 160)
-        <textarea id="profile-bio" maxlength="160" rows="3"></textarea>
-      </label>
-      <button class="btn btn-primary" type="submit">Guardar perfil</button>
-      <p class="msg" id="profile-msg" role="status"></p>
-    </form>
-    <button class="btn btn-ghost" type="button" id="logout-btn">Cerrar sesión</button>
-  </div>
-</section>
 </main>
+
+<div id="app" hidden>
+  <header class="app-top">
+    <a class="brand" href="#" aria-label="UNORA">
+      <svg class="logo" viewBox="0 0 64 72" aria-hidden="true"><path d="M8 4h16v34c0 6 4 10 8 10s8-4 8-10V4h16v36c0 16-12 28-24 28S8 56 8 40z" fill="url(#lg)"/></svg>
+      <span>UNORA</span>
+    </a>
+    <div class="me-avatar" id="me-avatar" aria-hidden="true">U</div>
+  </header>
+
+  <div class="app-main">
+    <section class="view" id="view-feed">
+      <div class="people" id="people-row" aria-label="Personas nuevas en UNORA"></div>
+
+      <form id="post-form" class="composer">
+        <label class="sr" for="post-text" style="position:absolute;left:-9999px">Escribe una publicación</label>
+        <textarea id="post-text" maxlength="1000" rows="3" placeholder="¿Qué momento quieres compartir?" required></textarea>
+        <div class="composer-row">
+          <span id="post-count">0/1000</span>
+          <button class="btn btn-primary" type="submit">Publicar</button>
+        </div>
+        <p class="msg" id="post-msg" role="status"></p>
+      </form>
+
+      <div id="feed-list"></div>
+      <p class="empty" id="feed-empty" hidden>Aún no hay publicaciones. Sé la primera persona en compartir un momento.</p>
+    </section>
+
+    <section class="view" id="view-discover" hidden>
+      <h2>Descubrir personas</h2>
+      <div id="people-list"></div>
+    </section>
+
+    <section class="view" id="view-profile" hidden>
+      <div class="profile-panel">
+        <h2 id="account-title">Tu perfil</h2>
+        <p id="account-sub" style="color:#c9cbee">Cuéntanos quién eres para empezar.</p>
+        <form id="profile-form" class="form">
+          <label>Nombre visible
+            <input id="profile-name" type="text" maxlength="60" required>
+          </label>
+          <label>Nombre de usuario (3-24: letras minúsculas, números o _)
+            <input id="profile-username" type="text" maxlength="24" required autocapitalize="none" spellcheck="false">
+          </label>
+          <label>Biografía (máx. 160)
+            <textarea id="profile-bio" maxlength="160" rows="3"></textarea>
+          </label>
+          <button class="btn btn-primary" type="submit">Guardar perfil</button>
+          <p class="msg" id="profile-msg" role="status"></p>
+        </form>
+        <button class="btn btn-ghost" type="button" id="logout-btn">Cerrar sesión</button>
+      </div>
+    </section>
+  </div>
+
+  <nav class="bottom-nav" aria-label="Navegación principal">
+    <button class="nav-btn active" type="button" data-view="feed"><span aria-hidden="true">⌂</span>Inicio</button>
+    <button class="nav-btn" type="button" data-view="discover"><span aria-hidden="true">◎</span>Descubrir</button>
+    <button class="nav-btn nav-plus" type="button" id="nav-compose" aria-label="Escribir una publicación"><span aria-hidden="true">+</span></button>
+    <button class="nav-btn" type="button" data-view="profile"><span aria-hidden="true">☺</span>Perfil</button>
+  </nav>
+</div>
 
 <footer class="footer">
   <span>UNORA · Tu mundo. Tu gente.</span>
