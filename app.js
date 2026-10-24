@@ -30,7 +30,8 @@
     if (/password should be at least/i.test(m)) return "La contraseña debe tener al menos 8 caracteres.";
     if (/rate limit|too many/i.test(m)) return "Demasiados intentos. Espera unos minutos.";
     if (/duplicate|unique|23505/i.test(m) || error?.code === "23505") return "Ese nombre de usuario ya está ocupado.";
-    return "No se pudo completar la acción. Inténtalo de nuevo.";
+    console.error(error);
+    return "No se pudo completar: " + (m || "error desconocido");
   }
 
   function showTab(name) {
@@ -63,7 +64,7 @@
       .maybeSingle();
 
     if (error) {
-      say("profile-msg", "No se pudo cargar tu perfil.", true);
+      say("profile-msg", "No se pudo cargar tu perfil: " + error.message, true);
       return;
     }
 
@@ -104,7 +105,6 @@
         }
       });
       if (error) throw error;
-      // Si el correo ya existe, Supabase no crea otra cuenta (identities vacío).
       if (data.user && data.user.identities && data.user.identities.length === 0) {
         say("signup-msg", "Ese correo ya tiene cuenta. Prueba a iniciar sesión.", true);
       } else if (!data.session) {
@@ -195,7 +195,6 @@
   });
 
   db.auth.onAuthStateChange((event, session) => {
-    // No hacemos llamadas a Supabase directamente aquí dentro.
     setTimeout(() => {
       if (event === "PASSWORD_RECOVERY") {
         showGuest();
