@@ -1,65 +1,192 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#07091b">
-  <title>UNORA — Tu mundo. Tu gente.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080817">
+
+  <title>UNORA | Tu mundo. Tu gente.</title>
+
+  <meta
+    name="description"
+    content="UNORA: descubre personas, comparte tus momentos y conecta con el mundo."
+  >
+
   <link rel="stylesheet" href="./styles.css">
-  <script src="./config.js"></script>
 </head>
+
 <body>
-  <header class="topbar">
-    <a class="brand" href="./index.html">
-      <span class="brand-logo">U</span>
+  <header class="navbar">
+    <a class="brand" href="./index.html" aria-label="UNORA, inicio">
+      <span class="brand-icon">U</span>
       <span>UNORA</span>
     </a>
-    <span class="tagline">Tu mundo. Tu gente.</span>
+
+    <nav class="nav-links" aria-label="Navegación principal">
+      <a href="#inicio">Inicio</a>
+      <a href="#momentos">Moments</a>
+      <a href="#comunidad">Comunidad</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a class="button button-outline" href="#acceso">Iniciar sesión</a>
+      <a class="button button-primary" href="#acceso">Crear cuenta</a>
+    </div>
   </header>
 
-  <main class="hero">
-    <div class="preview preview-left">
-      <img src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=600&auto=format&fit=crop" alt="Paisaje compartido">
-      <p>Momentos que nos unen 💜</p>
-    </div>
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-content">
+        <span class="eyebrow">
+          ✦ TU PRÓXIMA CONEXIÓN EMPIEZA AQUÍ
+        </span>
 
-    <div class="preview preview-right">
-      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&auto=format&fit=crop" alt="Descubre nuevos lugares">
-      <p>Descubre el mundo ✦</p>
-    </div>
+        <h1>
+          Tu mundo.<br>
+          <span>Tu gente.</span>
+        </h1>
 
-    <section class="hero-content">
-      <div class="hero-symbol">U</div>
-      <h1>UNORA</h1>
-      <h2>Descubre personas.<br>Vive momentos.<br><span>En un solo lugar.</span></h2>
-      <p class="description">
-        La red social donde el mundo se encuentra,
-        comparte y se inspira.
-      </p>
+        <p class="hero-description">
+          Descubre personas, comparte tus momentos y conecta
+          con una comunidad que no tiene fronteras.
+          Tu historia merece ser vista.
+        </p>
 
-      <div class="actions">
-        <button id="create-account" class="button primary">Crear cuenta <span>→</span></button>
-        <button id="login" class="button secondary">Iniciar sesión</button>
+        <div class="hero-actions">
+          <a class="button button-primary button-large" href="#acceso">
+            Únete a UNORA <span aria-hidden="true">→</span>
+          </a>
+
+          <a class="button button-outline button-large" href="#momentos">
+            Descubrir Moments
+          </a>
+        </div>
+
+        <div class="hero-note">
+          <span class="status-dot"></span>
+          Un mundo de historias te está esperando
+        </div>
       </div>
-      <p id="message" class="message" role="status"></p>
+
+      <div class="hero-visual" aria-label="Vista previa de la comunidad UNORA">
+        <div class="glow glow-one"></div>
+        <div class="glow glow-two"></div>
+
+        <div class="preview-card preview-main">
+          <div class="preview-top">
+            <div class="avatar avatar-purple">U</div>
+            <div>
+              <strong>La comunidad UNORA</strong>
+              <span>Momentos que nos conectan</span>
+            </div>
+            <span class="preview-menu">•••</span>
+          </div>
+
+          <div class="preview-art">
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+            <div class="unora-symbol">U</div>
+            <span class="spark spark-one">✦</span>
+            <span class="spark spark-two">✧</span>
+            <span class="spark spark-three">✦</span>
+          </div>
+
+          <div class="preview-caption">
+            <strong>Un mundo. Millones de historias.</strong>
+            <p>Tu próximo gran momento empieza aquí.</p>
+          </div>
+
+          <div class="preview-stats">
+            <span>♡ Me gusta</span>
+            <span>◯ Comentar</span>
+            <span>↗ Compartir</span>
+          </div>
+        </div>
+
+        <div class="floating-card floating-top">
+          <span class="floating-icon">✦</span>
+          <div>
+            <strong>UNORA Moments</strong>
+            <span>Descubre algo nuevo</span>
+          </div>
+        </div>
+
+        <div class="floating-card floating-bottom">
+          <div class="avatar avatar-blue">M</div>
+          <div>
+            <strong>Nuevas conexiones</strong>
+            <span>Personas de todo el mundo</span>
+          </div>
+          <span class="connection-dot"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="momentos">
+      <div class="section-heading">
+        <span class="eyebrow">EXPLORA UNORA</span>
+        <h2>Mucho más que una red social.</h2>
+        <p>Un espacio para expresarte, descubrir y formar parte de algo más grande.</p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-icon">✧</div>
+          <h3>UNORA Moments</h3>
+          <p>Descubre historias, personas y momentos de cualquier lugar del mundo.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">◎</div>
+          <h3>Tu comunidad</h3>
+          <p>Comparte publicaciones, encuentra gente con tus intereses y conversa.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">▶</div>
+          <h3>Vídeos</h3>
+          <p>Un espacio pensado para descubrir vídeos y compartir tu creatividad.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">🏆</div>
+          <h3>UNORA Awards</h3>
+          <p>Reconocemos a creadores, comunidades e historias que dejan huella.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="join-section" id="comunidad">
+      <span class="eyebrow">EL MUNDO TE ESPERA</span>
+      <h2>Tu historia forma parte de UNORA.</h2>
+      <p>Conecta con personas, descubre nuevos mundos y empieza a compartir.</p>
+      <a class="button button-primary button-large" href="#acceso">
+        Descubre UNORA →
+      </a>
+    </section>
+
+    <section class="access-section" id="acceso">
+      <div class="access-card">
+        <span class="brand-icon">U</span>
+        <h2>Entra en tu mundo.</h2>
+        <p>Muy pronto podrás crear tu cuenta y conectar con la comunidad UNORA.</p>
+        <p class="access-note">
+          El registro y el inicio de sesión necesitan configurarse con un servicio
+          de autenticación antes de funcionar.
+        </p>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <span>UNORA</span>
-    <span>Tu mundo. Tu gente.</span>
+  <footer class="footer">
+    <a class="brand" href="#inicio">
+      <span class="brand-icon">U</span>
+      <span>UNORA</span>
+    </a>
+    <p>Tu mundo. Tu gente.</p>
+    <span>© 2026 UNORA. Todos los derechos reservados.</span>
   </footer>
-
-  <script>
-    const message = document.getElementById("message");
-
-    document.getElementById("create-account").addEventListener("click", () => {
-      message.textContent = "El registro se activará al conectar Supabase.";
-    });
-
-    document.getElementById("login").addEventListener("click", () => {
-      message.textContent = "El inicio de sesión se activará al conectar Supabase.";
-    });
-  </script>
 </body>
 </html>
+```
